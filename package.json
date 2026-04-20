@@ -1,9 +1,23 @@
 {
-  "name": "openreport",
+  "name": "openwhistle",
   "version": "1.0.0",
-  "description": "init",
+  "description": "Anonymous whistle submission library with pluggable SQLite and Supabase storage backends",
+  "author": "bendeguz06",
+  "keywords": [
+    "report",
+    "anonymous",
+    "sqlite",
+    "supabase",
+    "privacy"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -15,8 +29,6 @@
     "type": "git",
     "url": "git+https://github.com/bendeguz06/OpenReport.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bendeguz06/OpenReport/issues"

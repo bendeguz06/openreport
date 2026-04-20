@@ -1,6 +1,6 @@
-import type { ReportAdapter, Report } from "../types.js";
+import type { WhistleAdapter, Whistle } from "../types.js";
 
-export abstract class BaseAdapter implements ReportAdapter {
-  abstract save(report: Report): Promise<void>;
-  abstract list(): Promise<Report[]>;
+export abstract class BaseAdapter implements WhistleAdapter {
+  abstract save(whistle: Whistle): Promise<void>;
+  abstract list(): Promise<Whistle[]>;
 }

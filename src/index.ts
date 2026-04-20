@@ -1,17 +1,22 @@
 import { hashIP } from "./core.js";
-import type { ReportAdapter, Report } from "./types.js";
-import type { OpenReportConfig, OpenReportClient } from "./types.js";
+import type { WhistleAdapter, Whistle } from "./types.js";
+import type { OpenWhistleConfig, OpenWhistleClient } from "./types.js";
 
-export function createOpenReport(config: OpenReportConfig): OpenReportClient {
+export type { Whistle, WhistleAdapter, RawWhistle, OpenWhistleConfig, OpenWhistleClient } from "./types.js";
+export { SQLiteAdapter } from "./adapters/sqlite.js";
+export { SupabaseAdapter } from "./adapters/supabase.js";
+export { BaseAdapter } from "./adapters/base.js";
+
+export function createOpenWhistle(config: OpenWhistleConfig): OpenWhistleClient {
   return {
-    async submit(report) {
-      const anonymized: Report = {
+    async submit(whistle) {
+      const anonymized: Whistle = {
         id: crypto.randomUUID(),
-        name: report.name,
-        reason: report.reason,
-        ...(report.ip && { ipHash: hashIP(report.ip, config.salt) }),
+        name: whistle.name,
+        reason: whistle.reason,
+        ...(whistle.ip && { ipHash: hashIP(whistle.ip, config.salt) }),
         createdAt: new Date(),
-      }; // or "exactOptionalPropertyTypes": false
+      };
       await config.adapter.save(anonymized);
     },
     async list() {

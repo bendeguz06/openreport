@@ -1,26 +1,28 @@
-export interface Report {
+export interface Whistle {
   id: string;
   name: string;
   reason: string;
   ipHash?: string;
   createdAt: Date;
 }
-export interface ReportAdapter {
-  save(report: Report): Promise<void>;
-  list(): Promise<Report[]>;
+
+export interface WhistleAdapter {
+  save(whistle: Whistle): Promise<void>;
+  list(): Promise<Whistle[]>;
 }
-export interface RawReport {
+
+export interface RawWhistle {
   name: string;
   reason: string;
   ip?: string;
 }
 
-export interface OpenReportConfig {
-  adapter: ReportAdapter;
+export interface OpenWhistleConfig {
+  adapter: WhistleAdapter;
   salt: string;
 }
 
-export interface OpenReportClient {
-  submit: (report: RawReport) => Promise<void>;
-  list: () => Promise<Report[]>;
+export interface OpenWhistleClient {
+  submit: (whistle: RawWhistle) => Promise<void>;
+  list: () => Promise<Whistle[]>;
 }

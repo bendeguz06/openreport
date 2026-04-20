@@ -1,8 +1,8 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import type { Report } from "../types.js";
+import type { Whistle } from "../types.js";
 import { BaseAdapter } from "./base.js";
 
-interface ReportRow {
+interface WhistleRow {
   id: string;
   name: string;
   reason: string;
@@ -22,23 +22,23 @@ export class SupabaseAdapter extends BaseAdapter {
     this.client = createClient(url, key);
   }
 
-  async save(report: Report): Promise<void> {
-    const { error } = await this.client.from("reports").insert({
-      id: report.id,
-      name: report.name,
-      reason: report.reason,
-      ip_hash: report.ipHash ?? null,
-      created_at: report.createdAt.toISOString(),
+  async save(whistle: Whistle): Promise<void> {
+    const { error } = await this.client.from("whistles").insert({
+      id: whistle.id,
+      name: whistle.name,
+      reason: whistle.reason,
+      ip_hash: whistle.ipHash ?? null,
+      created_at: whistle.createdAt.toISOString(),
     });
     if (error) throw new Error(`Supabase insert failed: ${error.message}`);
   }
 
-  async list(): Promise<Report[]> {
+  async list(): Promise<Whistle[]> {
     const { data, error } = await this.client
-      .from("reports")
+      .from("whistles")
       .select("*");
     if (error) throw new Error(`Supabase select failed: ${error.message}`);
-    return (data as ReportRow[]).map((row) => ({
+    return (data as WhistleRow[]).map((row) => ({
       id: row.id,
       name: row.name,
       reason: row.reason,

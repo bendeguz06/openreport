@@ -1,7 +1,7 @@
 {
-  "name": "openreport",
+  "name": "openwhistle",
   "version": "1.0.0",
-  "description": "Anonymous report submission library with pluggable SQLite and Supabase storage backends",
+  "description": "Anonymous whistle submission library with pluggable SQLite and Supabase storage backends",
   "author": "bendeguz06",
   "keywords": [
     "report",

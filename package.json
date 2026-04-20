@@ -2,8 +2,13 @@
   "name": "openreport",
   "version": "1.0.0",
   "description": "init",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +23,8 @@
   },
   "homepage": "https://github.com/bendeguz06/OpenReport#readme",
   "devDependencies": {
+    "@types/node": "^25.6.0",
     "typescript": "^6.0.3"
-  }
+  },
+  "type": "module"
 }

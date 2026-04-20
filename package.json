@@ -22,7 +22,12 @@
     "url": "https://github.com/bendeguz06/OpenReport/issues"
   },
   "homepage": "https://github.com/bendeguz06/OpenReport#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0",
+    "better-sqlite3": "^9.0.0"
+  },
   "devDependencies": {
+    "@types/better-sqlite3": "*",
     "@types/node": "^25.6.0",
     "typescript": "^6.0.3"
   },

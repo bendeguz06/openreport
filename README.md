@@ -1,4 +1,4 @@
-# openreport
+# OpenReport
 
 A small library for collecting anonymous reports. You bring your own storage backend — openreport handles the API and hashes IPs so you never store them raw.
 

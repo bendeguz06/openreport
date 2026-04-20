@@ -1,45 +1,75 @@
-# OpenReport
+# OpenWhistle
 
-A small library for collecting anonymous reports. You bring your own storage backend — openreport handles the API and hashes IPs so you never store them raw.
+A small library for collecting anonymous whistleblower submissions. You bring your own storage backend — openwhistle handles the API and hashes IPs so you never store them raw.
 
 ## Install
 
 ```bash
-npm install openreport
+npm install openwhistle
 ```
 
 ## Usage
 
 ```ts
-import { createOpenReport } from "openreport";
+import { createOpenWhistle, SQLiteAdapter, SupabaseAdapter } from "openwhistle";
 
-const client = createOpenReport({
-  adapter: yourAdapter, // SQLite, Supabase, whatever you wire up
+const client = createOpenWhistle({
+  adapter: new SQLiteAdapter("whistles.db"),
   salt: process.env.HASH_SALT,
 });
 
-// Submit a report
-await client.submit({ name: "Alice", reason: "Spam in the comments" });
+// Submit a whistle
+await client.submit({ name: "Alice", reason: "Fraud in accounting" });
 
 // With IP (gets hashed automatically)
-await client.submit({ name: "Alice", reason: "Spam", ip: req.ip });
+await client.submit({ name: "Alice", reason: "Fraud in accounting", ip: req.ip });
 
-// List all reports
-const reports = await client.list();
+// List all whistles
+const whistles = await client.list();
 ```
 
 ## Adapters
 
-openreport doesn't store anything on its own. You need to pass in an adapter that implements two methods:
+### SQLite
 
 ```ts
-interface ReportAdapter {
-  save(report: Report): Promise<void>;
-  list(): Promise<Report[]>;
-}
+import { SQLiteAdapter } from "openwhistle";
+
+const adapter = new SQLiteAdapter("whistles.db");
 ```
 
-SQLite and Supabase adapters are on the way. For now, write your own or use an in-memory one for testing.
+Creates the `whistles` table automatically on first run.
+
+### Supabase
+
+```ts
+import { SupabaseAdapter } from "openwhistle";
+
+const adapter = new SupabaseAdapter();
+```
+
+Reads `SUPABASE_URL` and `SUPABASE_ANON_KEY` from environment variables. Create a `whistles` table in your Supabase project with these columns:
+
+| Column | Type |
+|---|---|
+| `id` | `text` (primary key) |
+| `name` | `text` |
+| `reason` | `text` |
+| `ip_hash` | `text` (nullable) |
+| `created_at` | `text` |
+
+### Custom adapter
+
+Implement the `WhistleAdapter` interface to use any other backend:
+
+```ts
+import type { WhistleAdapter, Whistle } from "openwhistle";
+
+class MyAdapter implements WhistleAdapter {
+  async save(whistle: Whistle): Promise<void> { ... }
+  async list(): Promise<Whistle[]> { ... }
+}
+```
 
 ## Privacy
 

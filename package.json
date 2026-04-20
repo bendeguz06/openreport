@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "Anonymous report submission library with pluggable SQLite and Supabase storage backends",
   "author": "bendeguz06",
-  "keywords": ["report", "anonymous", "sqlite", "supabase", "privacy"],
+  "keywords": [
+    "report",
+    "anonymous",
+    "sqlite",
+    "supabase",
+    "privacy"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -23,8 +29,6 @@
     "type": "git",
     "url": "git+https://github.com/bendeguz06/OpenReport.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bendeguz06/OpenReport/issues"

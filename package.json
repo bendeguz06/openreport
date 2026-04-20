@@ -1,0 +1,23 @@
+{
+  "name": "openreport",
+  "version": "1.0.0",
+  "description": "init",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bendeguz06/OpenReport.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bendeguz06/OpenReport/issues"
+  },
+  "homepage": "https://github.com/bendeguz06/OpenReport#readme",
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
